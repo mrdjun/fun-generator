@@ -1,12 +1,13 @@
 <h1 align="center"><a href="https://github.com/mrdjun" target="_blank">Fun-Generator</a></h1>
-<p>
+<p align="center">
 <a href="https://github.com/mrdjun/fun-boot"><img alt="JDK" src="https://img.shields.io/badge/JDK-1.8-orange.svg"/></a>
 <a href="http://mrdjun.github.io"><img alt="Author" src="https://img.shields.io/badge/Author-DJun-blue"/></a>
 <a href="https://jq.qq.com/?_wv=1027&k=57LIuZr"><img alt="QQ群" src="https://img.shields.io/badge/chat-Coder%E5%A4%A7%E5%AE%B6%E5%BA%AD-yellow"/></a>
 <a href="https://github.com/mrdjun/fun-generator/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/java-aodeng/hope.svg?style=flat-square"/></a>
 </p>
 # 简介
-> Powered By xxl-code-generator.
+
+> Powered By [xxl-code-generator](https://github.com/mrdjun/fun-generator).
 
 > 🍋个人博客：mrdjun.github.io
 
