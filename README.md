@@ -7,7 +7,7 @@
 </p>
 # 简介
 
-> Powered By [xxl-code-generator](https://github.com/mrdjun/fun-generator).
+> Powered By [xxl-code-generator](http://www.xuxueli.com/xxl-code-generator/#/).
 
 > 🍋个人博客：mrdjun.github.io
 
@@ -18,7 +18,7 @@
 
 - 目的：极大的增强代码生成工具的可移植性，走到哪儿用到哪儿🍻
 
-- 这是从 [xxl-code-generator](https://github.com/mrdjun/fun-generator) 分离出来的项目.
+- 这是从 [xxl-code-generator](http://www.xuxueli.com/xxl-code-generator/#/) 分离出来的项目.
 
 ### 使用说明
 
