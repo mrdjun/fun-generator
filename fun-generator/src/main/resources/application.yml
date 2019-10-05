@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+  # freemarker
+  freemarker:
+    # 模板加载路径
+    templateLoaderPath: classpath:/templates/
+    # 后缀（可手动改为.html）
+    suffix: .ftl
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+    content-type: text/html
