@@ -53,6 +53,4 @@ public interface ${classInfo.className}Service {
      */
     int delete${classInfo.className}ByIds(String ${classInfo.conversionPrimaryKey}s);
 
-
-
 }

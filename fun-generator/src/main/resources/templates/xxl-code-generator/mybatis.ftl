@@ -41,6 +41,7 @@
                 </#if>
             </#list>
             </#if>
+            <if test="update_time != null">create_time</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
@@ -54,6 +55,7 @@
             </#if>
             </#list>
             </#if>
+            <if test="update_time != null">sysdate()</if>
         </trim>
     </insert>
 
@@ -65,7 +67,9 @@
                 <if test="${fieldItem.fieldName} != null  and ${fieldItem.fieldName} != ''">${fieldItem.columnName} = ${r"#{"}${fieldItem.fieldName}${r"}"},</if>
             </#if>
             </#list>
+            <if test="update_time != null">update_time = sysdate()</if>
         </trim>
+
         WHERE  ${classInfo.primaryKey} = ${r"#{"}${classInfo.conversionPrimaryKey}${r"}"}
     </update>
 
