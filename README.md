@@ -13,10 +13,10 @@
 > 🍊地址：https://github.com/mrdjun/fun-generator <br/>
 ------------------------------
 
-### 项目说明
-- 还在为不会写代码生成工具而发愁吗？此项目既供学习又供使用。
+## 项目说明
+- 还在为不会写代码生成工具而发愁？可以利用此项目进行学习，还能直接用，足以满足小项目了，又快又狠。
 
-- 目的：极大的增强代码生成工具的可移植性，走到哪儿用到哪儿🍻
+- 目的：极大的增强代码生成工具的可移植性，快速完成小型外包项目，走到哪儿用到哪儿🍻
 
 - 灵感源于 [xxl-code-generator](http://www.xuxueli.com/xxl-code-generator/#/).
 
@@ -37,8 +37,168 @@
      </span>
   </pre>
 
-### 使用说明
+## 使用说明
 - 再三考虑了一下最终还是决定用聚合工程来搭建这个架子，其中包含三个模块
     - fun-demo 我放了一个生成的模板载里面作为参考，也可以将此模块作为测试模块使用。
     - fun-generator 生成器
     - tool-common 放的实体类和一些工具类
+
+## 代码质量展示
+### Controller
+```
+ /**
+  * 模板：查询【功能名】 列表
+  * 查询 用户 列表
+  */
+ @PostMapping("/selectUserList")
+ public CommonResult selectUserList(Demo demo,
+                                    @RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum,
+                                    @RequestParam(value = "pageNum",defaultValue = "10",required = false)int pageSize){
+     return CommonResult.success(CommonPage.restPage(userService.selectUserList(demo,pageNum,pageSize)));
+ }
+
+ /**
+  * 模板：通过Id查询【功能名】
+  * 通过Id查询 用户
+  */
+ @GetMapping("/selectUserById/{userId}")
+ public CommonResult selectUserById(@PathVariable("userId") Long userId){
+     return CommonResult.success(userService.selectUserById(userId));
+ }
+
+ /**
+  * 模板：新增【功能名】
+  * 新增 用户
+  */
+ @PostMapping("/insertUser")
+ public CommonResult insertUser(Demo demo){
+     return CommonResult.success(userService.insertUser(demo));
+ }
+
+ /**
+  * 模板：修改【功能名】信息
+  * 修改 用户 信息
+  */
+ @PostMapping("/updateUser")
+ public CommonResult updateUser(Demo demo){
+     return CommonResult.success(userService.updateUser(demo));
+ }
+
+ /**
+  * 模板：通过id删除【功能名】
+  * 通过id删除 用户
+  */
+ @GetMapping("/deleteUserById/{userId}")
+ public CommonResult deleteUserById( @PathVariable("userId") Long userId){
+     return CommonResult.success(userService.deleteUserById(userId));
+ }
+
+ /**
+  * 模板：通过id批量删除【功能名】
+  * 通过id 批量删除 用户
+  */
+ @PostMapping("/deleteUserByIds")
+ public CommonResult deleteUserByIds(String userIds){
+     return CommonResult.success(userService.deleteUserByIds(userIds));
+ }
+```
+
+### MyBatis XML
+
+```
+<mapper namespace="com.fun.project.mapper.RoleMapper">
+    <resultMap id="RoleResult" type="Role" >
+        <result column="role_id" property="roleId" />
+        <result column="role_name" property="roleName" />
+        <result column="role_key" property="roleKey" />
+        <result column="role_sort" property="roleSort" />
+        <result column="status" property="status" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <sql id="RoleResultVo">
+        select
+        role_id,role_name,role_key,role_sort,status,del_flag,create_by,create_time,update_by,update_time,remark
+         from sys_role
+    </sql>
+
+    <select id="selectRoleById" parameterType="Long" resultMap="RoleResult">
+        <include refid="RoleResultVo" />
+        WHERE role_id = #{roleId}
+    </select>
+
+    <select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
+        <include refid="RoleResultVo"/>
+        <where>
+            <if test="roleId != null and roleId != 0">
+                and role_id = #{roleId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertRole" parameterType="Role" useGeneratedKeys="true">
+        INSERT INTO sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">role_id, </if>
+            <if test="roleName != null  and roleName != ''">role_name, </if>
+            <if test="roleKey != null  and roleKey != ''">role_key, </if>
+            <if test="roleSort != null  and roleSort != ''">role_sort, </if>
+            <if test="status != null  and status != ''">status, </if>
+            <if test="delFlag != null  and delFlag != ''">del_flag, </if>
+            <if test="createBy != null  and createBy != ''">create_by, </if>
+            <if test="createTime != null  and createTime != ''">create_time, </if>
+            <if test="updateBy != null  and updateBy != ''">update_by, </if>
+            <if test="updateTime != null  and updateTime != ''">update_time, </if>
+            <if test="remark != null  and remark != ''">remark </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">#{roleId},</if>
+            <if test="roleName != null  and roleName != ''">#{roleName},</if>
+            <if test="roleKey != null  and roleKey != ''">#{roleKey},</if>
+            <if test="roleSort != null  and roleSort != ''">#{roleSort},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null  and createTime != ''">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null  and updateTime != ''">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark}</if>
+        </trim>
+    </insert>
+
+    <update id="updateRole" parameterType="Role" >
+        UPDATE sys_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">role_id = #{roleId},</if>
+            <if test="roleName != null  and roleName != ''">role_name = #{roleName},</if>
+            <if test="roleKey != null  and roleKey != ''">role_key = #{roleKey},</if>
+            <if test="roleSort != null  and roleSort != ''">role_sort = #{roleSort},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null  and updateTime != ''">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        WHERE  role_id = #{roleId}
+    </update>
+
+    <delete id="deleteRoleById" parameterType="Long">
+        DELETE FROM sys_role
+        WHERE  role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteRoleByIds" parameterType="String">
+        delete from sys_role where role_id in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
+```
