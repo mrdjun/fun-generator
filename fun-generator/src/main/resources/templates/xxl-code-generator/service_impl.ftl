@@ -1,10 +1,14 @@
-package com.fun.project.service;
+package com.fun.project.service.impl;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.github.pagehelper.PageHelper;
+
+import com.fun.common.utils.text.Convert;
+import com.fun.project.mapper.${classInfo.className}Mapper;
+import com.fun.project.service.${classInfo.className}Service;
+import com.fun.project.entity.${classInfo.className};
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * ${classInfo.classComment}

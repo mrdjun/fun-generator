@@ -1,7 +1,7 @@
 package com.fun.project.mapper;
 
 
-import com.fun.project.entity.User;
+import com.fun.project.entity.Demo;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import java.util.List;
  * 例：用户 DAO
  * @author DJun
  */
-public interface UserMapper {
+public interface DemoMapper {
 
     /**
      * 模板：查询【功能名】 列表
      * 例：查询 用户 列表
-     * @param user 【功能名】 对象
+     * @param demo 【功能名】 对象
      * @return 【功能名】列表
      */
-    List<User> selectUserList(User user);
+    List<Demo> selectUserList(Demo demo);
 
     /**
      * 模板：通过Id查询【功能名】
@@ -26,15 +26,15 @@ public interface UserMapper {
      * @param userId 【功能名】 Id
      * @return 【功能名】对象
      */
-    User selectUserById(long userId);
+    Demo selectUserById(long userId);
 
     /**
      * 模板：新增【功能名】
      * 例：新增 用户
-     * @param user 【功能名】 对象
+     * @param demo 【功能名】 对象
      * @return 插入行数
      */
-    int insertUser(User user);
+    int insertUser(Demo demo);
 
 
     /**
@@ -58,9 +58,9 @@ public interface UserMapper {
      * 模板：通过id批量删除【功能名】
      * 例：通过id 批量删除 用户
      *
-     * @param user 用户对象
+     * @param demo 用户对象
      * @return 更新行数
      */
-    int updateUser(User user);
+    int updateUser(Demo demo);
 
 }

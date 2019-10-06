@@ -1,4 +1,4 @@
-package com.fun.utils;
+package com.fun.pagehelper;
 
 import com.github.pagehelper.PageInfo;
 import lombok.Data;

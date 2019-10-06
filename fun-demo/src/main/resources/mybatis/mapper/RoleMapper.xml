@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fun.project.mapper.RoleMapper">
+
+    <resultMap id="RoleResult" type="Role" >
+        <result column="role_id" property="roleId" />
+        <result column="role_name" property="roleName" />
+        <result column="role_key" property="roleKey" />
+        <result column="role_sort" property="roleSort" />
+        <result column="status" property="status" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <sql id="RoleResultVo">
+        select
+        role_id,role_name,role_key,role_sort,status,del_flag,create_by,create_time,update_by,update_time,remark
+         from sys_role
+    </sql>
+
+    <select id="selectRoleById" parameterType="Long" resultMap="RoleResult">
+        <include refid="RoleResultVo" />
+        WHERE role_id = #{roleId}
+    </select>
+
+    <select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
+        <include refid="RoleResultVo"/>
+        <where>
+            <if test="roleId != null and roleId != 0">
+                and role_id = #{roleId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertRole" parameterType="Role" useGeneratedKeys="true">
+        INSERT INTO sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">role_id, </if>
+            <if test="roleName != null  and roleName != ''">role_name, </if>
+            <if test="roleKey != null  and roleKey != ''">role_key, </if>
+            <if test="roleSort != null  and roleSort != ''">role_sort, </if>
+            <if test="status != null  and status != ''">status, </if>
+            <if test="delFlag != null  and delFlag != ''">del_flag, </if>
+            <if test="createBy != null  and createBy != ''">create_by, </if>
+            <if test="createTime != null  and createTime != ''">create_time, </if>
+            <if test="updateBy != null  and updateBy != ''">update_by, </if>
+            <if test="updateTime != null  and updateTime != ''">update_time, </if>
+            <if test="remark != null  and remark != ''">remark </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">#{roleId},</if>
+            <if test="roleName != null  and roleName != ''">#{roleName},</if>
+            <if test="roleKey != null  and roleKey != ''">#{roleKey},</if>
+            <if test="roleSort != null  and roleSort != ''">#{roleSort},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null  and createTime != ''">#{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null  and updateTime != ''">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark}</if>
+        </trim>
+    </insert>
+
+    <update id="updateRole" parameterType="Role" >
+        UPDATE sys_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roleId != null  and roleId != ''">role_id = #{roleId},</if>
+            <if test="roleName != null  and roleName != ''">role_name = #{roleName},</if>
+            <if test="roleKey != null  and roleKey != ''">role_key = #{roleKey},</if>
+            <if test="roleSort != null  and roleSort != ''">role_sort = #{roleSort},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null  and updateTime != ''">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        WHERE  role_id = #{roleId}
+    </update>
+
+    <delete id="deleteRoleById" parameterType="Long">
+        DELETE FROM sys_role
+        WHERE  role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteRoleByIds" parameterType="String">
+        delete from sys_role where role_id in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

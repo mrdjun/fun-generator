@@ -2,9 +2,9 @@ package com.fun.project.controller;
 
 
 import com.fun.common.result.CommonResult;
-import com.fun.project.entity.User;
-import com.fun.project.service.IUserService;
-import com.fun.utils.CommonPage;
+import com.fun.project.entity.Demo;
+import com.fun.project.service.IDemoService;
+import com.fun.pagehelper.CommonPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class DemoController {
     @Autowired
-    private IUserService userService;
+    private IDemoService userService;
 
     /**
      * 模板：查询【功能名】 列表
      * 查询 用户 列表
      */
     @PostMapping("/selectUserList")
-    public CommonResult selectUserList(User user,
+    public CommonResult selectUserList(Demo demo,
                                        @RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum,
                                        @RequestParam(value = "pageNum",defaultValue = "10",required = false)int pageSize){
-        return CommonResult.success(CommonPage.restPage(userService.selectUserList(user,pageNum,pageSize)));
+        return CommonResult.success(CommonPage.restPage(userService.selectUserList(demo,pageNum,pageSize)));
     }
 
     /**
@@ -43,8 +43,8 @@ public class UserController {
      * 新增 用户
      */
     @PostMapping("/insertUser")
-    public CommonResult insertUser(User user){
-        return CommonResult.success(userService.insertUser(user));
+    public CommonResult insertUser(Demo demo){
+        return CommonResult.success(userService.insertUser(demo));
     }
 
     /**
@@ -52,8 +52,8 @@ public class UserController {
      * 修改 用户 信息
      */
     @PostMapping("/updateUser")
-    public CommonResult updateUser(User user){
-        return CommonResult.success(userService.updateUser(user));
+    public CommonResult updateUser(Demo demo){
+        return CommonResult.success(userService.updateUser(demo));
     }
 
     /**

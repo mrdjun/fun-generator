@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="【mapper路径】.${classInfo.className}Mapper">
+<mapper namespace="com.fun.project.mapper.${classInfo.className}Mapper">
 
     <resultMap id="${classInfo.className}Result" type="${classInfo.className}" >
     <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>

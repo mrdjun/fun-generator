@@ -6,7 +6,7 @@ package com.fun.project.entity;
         </#if>
     </#list>
 </#if>
-import com.fun.framework.web.entity.BaseEntity;
+import com.fun.common.web.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
