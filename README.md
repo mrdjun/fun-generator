@@ -45,7 +45,7 @@
 
 ## 代码质量展示
 ### Controller
-```
+```java
  /**
   * 模板：查询【功能名】 列表
   * 查询 用户 列表
@@ -105,7 +105,7 @@
 
 ### MyBatis XML
 
-```
+```xml
 <mapper namespace="com.fun.project.mapper.RoleMapper">
     <resultMap id="RoleResult" type="Role" >
         <result column="role_id" property="roleId" />
