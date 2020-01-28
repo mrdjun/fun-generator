@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * ${classInfo.classComment}
  *
- * @author u-fun
+ * @author DJun
  * @date ${.now?string('yyyy/MM/dd')}
  */
-public interface ${classInfo.className}Service {
+public interface I${classInfo.className}Service {
 
     /**
      * 查询${classInfo.className}列表

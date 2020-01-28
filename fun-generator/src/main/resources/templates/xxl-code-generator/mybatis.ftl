@@ -12,9 +12,7 @@
     </resultMap>
 
     <sql id="${classInfo.className}ResultVo">
-        select <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
-        <#list classInfo.fieldList as fieldItem >${fieldItem.columnName}<#if fieldItem_has_next>,</#if></#list>
-        </#if> from ${classInfo.tableName}
+        select <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0><#list classInfo.fieldList as fieldItem >${fieldItem.columnName}<#if fieldItem_has_next>,</#if></#list></#if> from ${classInfo.tableName}
     </sql>
 
     <select id="select${classInfo.className}ById" parameterType="Long" resultMap="${classInfo.className}Result">
@@ -25,9 +23,7 @@
     <select id="select${classInfo.className}List" parameterType="${classInfo.className}" resultMap="${classInfo.className}Result">
         <include refid="${classInfo.className}ResultVo"/>
         <where>
-            <if test="${classInfo.conversionPrimaryKey} != null and ${classInfo.conversionPrimaryKey} != 0">
-                and ${classInfo.primaryKey} = ${r"#{"}${classInfo.conversionPrimaryKey}${r"}"}
-            </if>
+
         </where>
     </select>
 
@@ -41,13 +37,12 @@
                 </#if>
             </#list>
             </#if>
-            <if test="update_time != null">create_time</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
             <#if fieldItem.columnName != "Id" >
-                <#if fieldItem.columnName="AddTime" || fieldItem.columnName="UpdateTime" >
+                <#if fieldItem.columnName="AddTime" || fieldItem.columnName="createTime" >
                 NOW()<#if fieldItem_has_next>,</#if>
                 <#else>
                 <if test="${fieldItem.fieldName} != null  and ${fieldItem.fieldName} != ''">${r"#{"}${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if></if>
@@ -55,7 +50,6 @@
             </#if>
             </#list>
             </#if>
-            <if test="update_time != null">sysdate()</if>
         </trim>
     </insert>
 
@@ -64,18 +58,15 @@
         <trim prefix="SET" suffixOverrides=",">
             <#list classInfo.fieldList as fieldItem >
             <#if fieldItem.columnName != "Id" && fieldItem.columnName != "AddTime" && fieldItem.columnName != "UpdateTime" >
-                <if test="${fieldItem.fieldName} != null  and ${fieldItem.fieldName} != ''">${fieldItem.columnName} = ${r"#{"}${fieldItem.fieldName}${r"}"},</if>
+                <if test="${fieldItem.fieldName} != null  and ${fieldItem.fieldName} != ''">${fieldItem.columnName} = ${r"#{"}${fieldItem.fieldName}${r"}"}<#if fieldItem_has_next>,</#if></if>
             </#if>
             </#list>
-            <if test="update_time != null">update_time = sysdate()</if>
         </trim>
-
         WHERE  ${classInfo.primaryKey} = ${r"#{"}${classInfo.conversionPrimaryKey}${r"}"}
     </update>
 
     <delete id="delete${classInfo.className}ById" parameterType="Long">
-        DELETE FROM ${classInfo.tableName}
-        WHERE  ${classInfo.primaryKey} = ${r"#{"}${classInfo.conversionPrimaryKey}${r"}"}
+        DELETE FROM ${classInfo.tableName} WHERE  ${classInfo.primaryKey} = ${r"#{"}${classInfo.conversionPrimaryKey}${r"}"}
     </delete>
 
     <delete id="delete${classInfo.className}ByIds" parameterType="String">

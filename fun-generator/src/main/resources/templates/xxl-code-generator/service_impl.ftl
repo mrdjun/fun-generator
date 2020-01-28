@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 
 import com.fun.common.utils.text.Convert;
 import com.fun.project.mapper.${classInfo.className}Mapper;
-import com.fun.project.service.${classInfo.className}Service;
+import com.fun.project.service.I${classInfo.className}Service;
 import com.fun.project.entity.${classInfo.className};
 
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * ${classInfo.classComment}
  *
- * @author u-fun
+ * @author DJun
  * @date ${.now?string('yyyy/MM/dd')}
  */
 @Service
-public class ${classInfo.className}ServiceImpl implements ${classInfo.className}Service {
+public class ${classInfo.className}ServiceImpl implements I${classInfo.className}Service {
 
 	@Autowired
 	private ${classInfo.className}Mapper ${classInfo.className?uncap_first}Mapper;

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * ${classInfo.classComment}
  *
- * @author u-fun
+ * @author DJun
  * @date ${.now?string('yyyy/MM/dd')}
  */
 public interface ${classInfo.className}Mapper {
