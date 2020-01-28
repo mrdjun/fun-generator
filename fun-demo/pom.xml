@@ -23,11 +23,10 @@
             <version>${fun.version}</version>
         </dependency>
 
-        <!-- Spring Data -->
+        <!-- spring-data -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${jpa.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
         <dependency>
