@@ -74,7 +74,6 @@ public class TableParseUtil {
         if (key.contains("`")) {
             key = key.substring(key.indexOf("`") + 1, key.lastIndexOf("`"));
         }
-        //System.out.println("::::"+key);
         String ConversionKey= StringUtils.toCamelCase(key);
         // field List
         List<GenTableColumn> fieldList = new ArrayList<>();
@@ -169,7 +168,6 @@ public class TableParseUtil {
         int index=0;
         if (tableName.contains("_")){
             String[] strArr = tableName.split("_");
-            System.out.println(strArr.length);
             for (int i = 1; i < strArr.length; ++i){
                 index++;
                 if(index==1)

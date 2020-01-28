@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 业务表 gen_table
  *
- * @author U-Fun
+ * @author DJun
  */
 @Getter
 @Setter
