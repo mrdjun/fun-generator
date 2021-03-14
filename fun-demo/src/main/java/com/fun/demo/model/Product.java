@@ -1,8 +1,6 @@
 package com.fun.demo.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 商品

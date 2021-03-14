@@ -3,12 +3,11 @@ package com.fun.demo.model.controller;
 import com.fun.demo.model.Product;
 import com.fun.demo.service.ProductService;
 import com.fun.demo.util.PageInfoEvt;
-import com.github.pagehelper.PageInfo;
 import com.fun.demo.util.R;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 
 @Api(tags = "商品")

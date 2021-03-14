@@ -1,7 +1,6 @@
 package com.fun.demo.dao;
 
 import com.fun.demo.model.User;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
