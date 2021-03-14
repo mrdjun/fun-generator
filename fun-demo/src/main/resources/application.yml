@@ -1,0 +1,16 @@
+server:
+  port: 8087
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.20.1:3306/fun_base?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+
+mybatis:
+  # 指定实体类所在包
+  typeAliasesPackage: com.fun.demo.model
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
