@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fun.demo.dao.UserMapper">
+
+    <resultMap id="UserResultMap" type="User" >
+        <result column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+    </resultMap>
+
+    <sql id="UserResultVo">
+        SELECT
+        `user_id`,
+        `username`,
+        `password`
+        FROM  t_user
+    </sql>
+
+    <insert id="insert" parameterType="User" >
+        INSERT INTO t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                `user_id`,
+            </if>
+            <if test="username != null and username != ''">
+                `username`,
+            </if>
+            <if test="password != null and password != ''">
+                `password`
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">
+                #{userId},
+            </if>
+            <if test="username != null and username != ''">
+                #{username},
+            </if>
+            <if test="password != null and password != ''">
+                #{password}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="Long" >
+        DELETE  FROM t_user
+        WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="String">
+        DELETE FROM t_user
+        WHERE id in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="User" >
+        UPDATE t_user
+        SET
+        <if test="userId != null and userId != '' ">
+            user_id = #{userId},
+        </if>
+        <if test="username != null and username != '' ">
+            username = #{username},
+        </if>
+        <if test="password != null and password != '' ">
+            password = #{password}
+        </if>
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="selectById" parameterType="Long" resultMap="UserResultMap">
+        <include refid="UserResultVo" />
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectList" parameterType="User" resultMap="UserResultMap">
+        <include refid="UserResultVo" />
+    </select>
+
+</mapper>

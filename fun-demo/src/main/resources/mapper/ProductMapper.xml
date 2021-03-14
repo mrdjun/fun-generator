@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fun.demo.dao.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="Product" >
+        <result column="id" property="id" />
+        <result column="product_name" property="productName" />
+        <result column="staus" property="staus" />
+        <result column="number" property="number" />
+    </resultMap>
+
+    <sql id="t_productResultVo">
+        SELECT
+        `id`,
+        `product_name`,
+        `staus`,
+        `number`
+        FROM  t_product
+    </sql>
+
+
+    <insert id="insert" parameterType="Product" >
+        INSERT INTO t_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                `id`,
+            </if>
+            <if test="productName != null and productName != ''">
+                `product_name`,
+            </if>
+            <if test="staus != null and staus != ''">
+                `staus`,
+            </if>
+            <if test="number != null and number != ''">
+                `number`
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id},
+            </if>
+            <if test="productName != null and productName != ''">
+                #{productName},
+            </if>
+            <if test="staus != null and staus != ''">
+                #{staus},
+            </if>
+            <if test="number != null and number != ''">
+                #{number}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="Long" >
+        DELETE  FROM t_product
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="String">
+        DELETE FROM t_product
+        WHERE id in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="update" parameterType="Product" >
+        UPDATE t_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and id != '' ">id = #{id},</if>
+            <if test="productName != null and productName != '' ">product_name = #{productName},
+            </if>
+            <if test="staus != null and staus != '' ">
+                staus = #{staus},
+            </if>
+            <if test="number != null and number != '' ">
+                number = #{number},
+            </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="Long" resultMap="ProductResultMap">
+        <include refid="t_productResultVo" />
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" parameterType="Product" resultMap="ProductResultMap">
+        <include refid="t_productResultVo" />
+    </select>
+
+</mapper>
